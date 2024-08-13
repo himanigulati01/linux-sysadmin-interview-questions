@@ -57,39 +57,156 @@ A collection of linux sysadmin/devops interview questions. Feel free to contribu
 
 * What is the name and the UID of the administrator user?
   
--> Ans : root and zero. It can be checked in /etc/passwd
+ANS : root and zero. It can be checked in /etc/passwd
 
 * How to list all files, including hidden ones, in a directory?
+
+ANS: 
+>> ls -la
+  
 * What is the Unix/Linux command to remove a directory and its contents?
+
+ANS: 
+>> rm -rf <dirname> or rm -ri <dirname>
+
+For empty dir 
+>> rmdir <dirname>
+
+  
 * Which command will show you free/used memory? Does free memory exist on Linux?
+
+ANS: 
+>> free -m OR vmstat -a
+Yes, 
+
 * How to search for the string "my konfu is the best" in files of a directory recursively?
+
+ANS: grep -ri "text" <dir> 
+
+-i for case insensitive.
+
 * How to connect to a remote server or what is SSH?
 * How to get all environment variables and how can you use them?
+
+>> env
+>> echo $HOME
+>> 
+
 * I get "command not found" when I run ```ifconfig -a```. What can be wrong?
+
+either not installed or binaries are in $PATH. Check using below command
+
+>> ip a
+>> echo $PATH
+
 * What happens if I type TAB-TAB?
 * What command will show the available disk space on the Unix/Linux system?
+
+>> df -h
+>> du -h
+
 * What commands do you know that can be used to check DNS records?
+
+>> nslookup -type=A example.com
+
 * What Unix/Linux commands will alter a files ownership, files permissions?
+
+>> chown username filename
+>> chmod -R 755 directory
+
 * What does ```chmod +x FILENAME``` do?
+
+Give execute permissions to the file for user group and other
+
+
 * What does the permission 0750 on a file mean?
+
+RWX -> 421
+USER (7) rwx
+
+GROUP (5) r-x
+
+OTHER (0) ---
+  
 * What does the permission 0750 on a directory mean?
 * How to add a new system user without login permissions?
+
+Create the User with /sbin/nologin Shell
+
+
+>> sudo useradd -m -s /sbin/nologin username
+
+-m: Creates a home directory for the user.
+
+-s /sbin/nologin: Sets the shell to /sbin/nologin, which prevents the user from logging in.
+
 * How to add/remove a group from a user?
 * What is a bash alias?
+
+>>  alias alias_name='command_to_run' 
+
 * How do you set the mail address of the root/a user?
 * What does CTRL-c do?
 * What does CTRL-d do?
 * What does CTRL-z do?
+
+CTRL-C: Interrupts and terminates the current process (sends SIGINT).
+CTRL-D: Sends an end-of-file (EOF) signal (logs out of shell or ends input).
+CTRL-Z: Suspends the current process (sends SIGTSTP) and puts it in the background.
+
 * What is in /etc/services?
+
+Purpose of /etc/services
+
+Service Name Resolution: It allows applications and system services to refer to network services by name rather than by port number. This can make configuration files and scripts more readable and easier to manage.
+
+Port Assignment: It provides a standard set of port assignments for well-known services, which helps in ensuring consistent communication across different systems and applications.
+
+
+
 * How to redirect STDOUT and STDERR in bash? (> /dev/null 2>&1)
+
+/dev/null is a special file that discards all data written to it. It is often used to suppress output or errors.
+
+To redirect both standard output and standard error to a file
+
+>> ls file > filename  2>&1
+
 * What is the difference between UNIX and Linux.
 * What is the difference between Telnet and SSH?
+
+Telnet: An older, unencrypted protocol for remote access and communication, using port 23. Considered insecure for modern use.
+
+SSH: A secure, encrypted protocol for remote access and management, using port 22. Provides additional features such as secure file transfer and port forwarding.
+
 * Explain the three load averages and what do they indicate. What command can be used to view the load averages?
+
+average number of processes in the run-queue over a given period.
+
+This can be important because a Linux system which is heavily diskio bound, can have very large loadavg, but low cpu utilization.
+
+Load Average < Number of CPU Cores: Indicates that the system is handling the load efficiently, with fewer processes waiting for CPU time.
+Load Average = Number of CPU Cores: Shows that the system is operating at full capacity. Processes are using the CPU efficiently, but there might be some queuing.
+Load Average > Number of CPU Cores: Suggests that the system is overloaded. More processes are waiting for CPU time than the system can handle, potentially leading to performance degradation.
+
 * Can you name a lower-case letter that is not a valid option for GNU ```ls```?
 * What is a Linux kernel module?
 * Walk me through the steps in booting into single user mode to troubleshoot a problem.
 * Walk me through the steps you'd take to troubleshoot a 404 error on a web application you administer.
+
+1. check the url
+2. server logs
+3. permissions of the requested files
+4. applicationlogs
+5. network routing
+
 * What is ICMP protocol? Why do you need to use?
+
+ICMP helps in diagnosing network issues, such as identifying connectivity problems, measuring round-trip time, and checking the path taken by packets.
+
+ping, traceroute
+
+
 
 #### [[⬆]](#toc) <a name='medium'>Medium Linux Questions:</a>
 
